@@ -1,0 +1,18 @@
+{
+  "name": "searchpms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mikhail Delport <mikhail@delport.ca> (http://8bits.ca)",
+  "license": "ISC",
+  "dependencies": {
+    "cli": "^0.11.1",
+    "inquirer": "^0.11.0",
+    "plex-api": "^3.2.0",
+    "pms-search": "^0.2.1"
+  }
+}
