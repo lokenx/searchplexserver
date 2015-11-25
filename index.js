@@ -39,12 +39,12 @@ inquirer.prompt(questions, function( answers ) {
   options.hostname = answers.server;
   options.username = answers.username;
   options.password = answers.password;
-  
+
   var client = new PlexAPI(options);
 
   client.query("/search?query=" + answers.query).then(function (results) {
     var filteredResults = results._children.filter(function (result) {
-      if (result._elementType === 'Video') {
+      if ((result.type === 'movie') || (result.type === 'show')) {
         return result;
       }
     });
@@ -52,7 +52,7 @@ inquirer.prompt(questions, function( answers ) {
     if (filteredResults.length > 0) {
       console.log('\nResults:\n');
       filteredResults.forEach(function (result) {
-        console.log(result.title);
+        console.log(result.type + ': ' + result.title);
       })
     } else {
       console.log("\n No results found\n");
