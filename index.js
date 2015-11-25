@@ -19,13 +19,28 @@ var questions = [
   },
   {
     type: "input",
+    name: "username",
+    message: "If you are using Plex Home please enter your username"
+  },
+  {
+    type: "password",
+    name: "password",
+    message: "If you are using Plex Home please enter your password"
+  },
+  {
+    type: "input",
     name: "query",
     message: "Enter a search term to use:"
   }
 ]
 
 inquirer.prompt(questions, function( answers ) {
-  var client = new PlexAPI(answers.server);
+  var options = {};
+  options.hostname = answers.server;
+  options.username = answers.username;
+  options.password = answers.password;
+  
+  var client = new PlexAPI(options);
 
   client.query("/search?query=" + answers.query).then(function (results) {
     var filteredResults = results._children.filter(function (result) {
@@ -44,6 +59,7 @@ inquirer.prompt(questions, function( answers ) {
     }
 
   }, function (err) {
-    throw new Error("Could not connect to server");
+    console.error("Could not connect to server:");
+    console.error(err);
   });
 });
